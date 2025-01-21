@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS spaces;
+DROP TABLE IF EXISTS user_details;
+
 
 -- Then, we recreate them
 -- Create or update the database
