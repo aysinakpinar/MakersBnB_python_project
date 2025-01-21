@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Spaces</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/index" class="logo">MakersBnB</a>
+            <div class="nav-links">
+                <a href="/customer" class="{% if request.path == '/customer' %}active{% endif %}">Browse Spaces</a>
+                {% if logged_in and user_role == 'lister' %}
+                <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
+                {% endif %}
+                {% if not logged_in %}
+                <a href="/login" class="{% if request.path == '/login' %}active{% endif %}">Login</a>
+                {% else %}
+                <a href="/logout">Logout</a>
+                {% endif %}
+            </div>            
+        </nav>
+    </header>
+
+    <main>
+        <section class="customer-section">
+            <h1>Available Spaces</h1>
+            <ul>
+                {% for space in spaces %}
+                <li>
+                    <strong>{{ space['space_name'] }}</strong>: {{ space['space_description'] }} - ${{ space['space_price'] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MakersBnB. All rights reserved. <a href="/about">About Us</a></p>
+    </footer>
+
+</body>
+</html>

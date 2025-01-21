@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/index" class="logo">MakersBnB</a>
+            <div class="nav-links">
+                <a href="/customer" class="{% if request.path == '/customer' %}active{% endif %}">Browse Spaces</a>
+                {% if logged_in and user_role == 'lister' %}
+                <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
+                {% endif %}
+                {% if not logged_in %}
+                <a href="/login" class="{% if request.path == '/login' %}active{% endif %}">Login</a>
+                {% else %}
+                <a href="/logout">Logout</a>
+                {% endif %}
+            </div>              
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h1>About MakersBnB</h1>
+            <p>
+                MakersBnB is a platform designed to connect property owners with travelers. 
+                Whether you're looking for a cozy apartment in the city or a luxurious villa by the beach, 
+                MakersBnB helps you find the perfect stay.
+            </p>
+            <p>
+                Founded in 2025, MakersBnB is committed to making travel seamless, enjoyable, and accessible for everyone.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MakersBnB. All rights reserved. <a href="/about" class="active">About Us</a></p>
+    </footer>
+</body>
+</html>
