@@ -45,12 +45,6 @@ def post_signup():
     user_created_at = datetime.datetime.now()
     user = User(None, username, user_password_hash, email, user_role, user_created_at)
     repository.create(user)
-    # # Hash the password
-    # user_password_hash = generate_password_hash(password)
-    # # adding timestamp
-    # user_created_at = datetime.datetime.now()
-    # user = User(None, username, user_password_hash, email, user_role, user_created_at)
-    # repository.create(user)
     return redirect('/index')
 
 # Login Page (GET)
