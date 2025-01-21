@@ -2,9 +2,8 @@ from flask import Blueprint, request, render_template, redirect, current_app, se
 from lib.database_connection import get_flask_database_connection
 from lib.user import User
 from lib.user_repository import UserRepository
-from werkzeug.security import generate_password_hash
 import datetime
-
+import bcrypt
 auth_routes = Blueprint('auth_routes', __name__)
 
 # Sign-Up Form (GET)
@@ -37,21 +36,22 @@ def post_signup():
     password = request.form['user_password']
     email = request.form['user_email']
     user_role = request.form['user_role']
-     # Hash the password
-    user_password_hash = generate_password_hash(password)
+    # Hash the password using bcrypt
+    salt = bcrypt.gensalt()
+    user_password_hash_encode = bcrypt.hashpw(password.encode('utf-8'), salt)
+    user_password_hash = user_password_hash_encode.decode('utf-8')
+    
+    # Adding timestamp
     user_created_at = datetime.datetime.now()
     user = User(None, username, user_password_hash, email, user_role, user_created_at)
     repository.create(user)
+    # # Hash the password
+    # user_password_hash = generate_password_hash(password)
+    # # adding timestamp
+    # user_created_at = datetime.datetime.now()
+    # user = User(None, username, user_password_hash, email, user_role, user_created_at)
+    # repository.create(user)
     return redirect('/index')
-
-    # connection = get_flask_database_connection(current_app)
-    # repository = UserRepository(connection)
-    # data = request.form
-    # connection.execute(
-    #     "INSERT INTO user_details (user_username, user_password, user_email, user_role) VALUES (%s, %s, %s, %s)",
-    #     [data['username'], data['password'], data['email'], data['role']]
-    # )
-    # return redirect('/index')
 
 # Login Page (GET)
 @auth_routes.route('/login', methods=['GET'])

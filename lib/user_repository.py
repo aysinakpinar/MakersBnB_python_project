@@ -42,7 +42,7 @@ class UserRepository:
         return None
     
     # Update a user password by its user email
-    def update_user_password_hash(self, user_email, user_password_hash):
+    def update_user_password(self, user_email, user_password_hash):
         self._connection.execute(
             f"UPDATE user_details SET user_password_hash = '{user_password_hash}' WHERE user_email = {user_email}"
         )
