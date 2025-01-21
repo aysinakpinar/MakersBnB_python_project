@@ -79,15 +79,19 @@ def post_login():
 @auth_routes.route('/logout', methods=['GET'])
 def logout():
     """
-    Log out the current user.
-
-    Clears the session data and redirects the user to the login page.
-
-    Returns:
-        Redirect to the login page.
+    Redirect to the logout splash page.
     """
-    session.clear()  # Clear all session data
-    return redirect('/index')  # Redirect to the login page
+    return redirect('/logout_page')  # Redirect to the logout splash page
+
+@auth_routes.route('/logout_page', methods=['GET'])
+def logout_page():
+    """
+    Render the logout page with a countdown.
+    Clears the session data and displays a splash screen with a countdown
+    before redirecting to the index page.
+    """
+    session.clear()  # Clear session data
+    return render_template('logout.html')
 
 @auth_routes.route('/index', methods=['GET'])
 def index():
