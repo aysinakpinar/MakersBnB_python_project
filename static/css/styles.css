@@ -1,0 +1,250 @@
+/* general reset: sets up basic styles for body */
+html, body {
+    height: 100%; /* ensures body spans full viewport height */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex; /* use flexbox layout for body */
+    flex-direction: column; /* stack header, main, footer vertically */
+}
+
+/* background image behind form */
+.background {
+    position: relative;
+    height: 100%;
+    background-image: url('/static/img/background-2.jpg'); /* replace with image path */
+    background-size: cover;
+    background-position: center;
+}
+
+/* header navigation bar: styles navigation at top */
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* logo styling: styles logo link in navigation */
+header nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+/* navigation links: styles links in navigation bar */
+header nav .nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+/* active navigation link: highlight active page with tab-like underline */
+header nav .nav-links a.active {
+    position: relative; /* enable positioning for pseudo-element */
+    color: #0056b3; /* darker blue for active link */
+    font-weight: bold; /* make active link bold */
+}
+
+header nav .nav-links a.active::after {
+    content: ''; /* creates underline */
+    position: absolute;
+    bottom: -16px; /* position line below nav bar */
+    left: 0;
+    width: 100%; /* full width of link */
+    height: 4px; /* thickness of underline */
+    background-color: #007bff; /* blue underline color */
+}
+
+/* navigation links hover: changes style when link is hovered */
+header nav .nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* hero section: styles main headline and subtext */
+.hero {
+    text-align: center;
+    margin: 50px 20px;
+}
+
+/* hero section headline: styles main headline text */
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* hero section subtext: styles subtext under headline */
+.hero .subtext {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #666;
+}
+
+/* form containers: styles signup and login forms */
+.signup-form, .login-form {
+    max-width: 400px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* form headings: styles headings inside forms */
+.signup-form h2, .login-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* form labels: styles labels for inputs */
+.signup-form label, .login-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* form inputs: styles text inputs */
+.signup-form input, .login-form input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* form buttons: styles submit buttons for forms */
+.signup-form button, .login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* add margin-top to login button */
+.login-form button {
+    margin-top: 24px; /* adds space above login button */
+}
+
+/* form buttons hover: changes button style on hover */
+.signup-form button:hover, .login-form button:hover {
+    background-color: #0056b3;
+}
+
+/* signup form radio buttons: styles container for role selection */
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* radio buttons legend: styles role heading */
+fieldset legend {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* container for radio buttons */
+.radio-group {
+    display: flex;
+    gap: 10px; /* space between buttons */
+    margin-top: 0px;
+    margin-bottom: 24px;
+}
+
+/* hide actual radio buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* style button labels */
+.radio-btn {
+    display: flex;
+    align-items: center; /* vertically align circle and text */
+    justify-content: flex-start; /* align content left of button */
+    flex: 1; /* make buttons equal width */
+    padding: 10px; /* padding inside button */
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #ccc; /* default gray border for unselected */
+    border-radius: 4px; /* round button corners */
+    background-color: #fff; /* button background */
+    color: #333; /* button text color */
+    cursor: pointer; /* pointer cursor for clickable area */
+    transition: border-color 0.3s, color 0.3s;
+    text-align: center; /* center text */
+}
+
+/* add styles for when radio button is selected */
+.radio-btn input[type="radio"]:checked + span {
+    color: #007bff; /* change text color when selected */
+}
+
+.radio-btn input[type="radio"]:checked + span::before {
+    background-color: #007bff; /* fill circle for selected button */
+    border-color: #007bff; /* change circle border color */
+}
+
+/* unselected and selected circles inside buttons */
+.radio-btn span::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc; /* default gray border */
+    border-radius: 50%; /* make it circle */
+    margin-right: 10px; /* space between circle and text */
+    vertical-align: middle; /* align circle vertically with text */
+    transition: background-color 0.3s, border-color 0.3s;
+    background-color: #fff; /* default unfilled circle */
+}
+
+/* hover effect for button */
+.radio-btn:hover {
+    border-color: #007bff; /* highlight button border */
+    color: #007bff; /* highlight text color */
+}
+
+.radio-btn:hover span::before {
+    border-color: #007bff; /* highlight circle border */
+}
+
+/* footer: consistent footer across pages */
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+    color: #666;
+    margin-top: auto; /* ensures footer stays at bottom */
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
