@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS "spaces" (
     space_description TEXT,
     space_price NUMERIC(10, 2) NOT NULL,
     space_lister_id INT NOT NULL,
-    space_occupied BOOLEAN DEFAULT TRUE,
+    space_active BOOLEAN DEFAULT TRUE,
     space_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     space_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_space_lister FOREIGN KEY (space_lister_id) REFERENCES "user_details" (user_id) ON DELETE CASCADE
