@@ -63,7 +63,7 @@ def post_login():
 
     # Query the user from the database
     user = connection.execute(
-        "SELECT * FROM user_details WHERE user_email = %s AND user_password = %s",
+        "SELECT * FROM user_details WHERE user_email = %s AND user_password_hash = %s",
         [data['email'], data['password']]
     )
 
