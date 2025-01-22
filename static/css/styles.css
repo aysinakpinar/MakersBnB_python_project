@@ -229,6 +229,45 @@ input[type="radio"] {
     border-color: #007bff; /* highlight circle border */
 }
 
+/* Logout Page Styling */
+.logout-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height of viewport */
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.logout-page h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.logout-page p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Countdown Bar Animation */
+.countdown-bar {
+    width: 100%;
+    height: 5px;
+    background: #007bff;
+    animation: countdown 5s linear;
+}
+
+@keyframes countdown {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
 /* footer: consistent footer across pages */
 footer {
     background-color: #f1f1f1;
