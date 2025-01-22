@@ -1,6 +1,9 @@
 from flask import Blueprint, request, render_template, redirect, current_app, session
 from lib.database_connection import get_flask_database_connection
-
+from lib.user import User
+from lib.user_repository import UserRepository
+import datetime
+import bcrypt
 auth_routes = Blueprint('auth_routes', __name__)
 
 # Sign-Up Form (GET)
@@ -26,12 +29,22 @@ def post_signup():
     Returns:
         Redirect to the login page after successful signup.
     """
+
     connection = get_flask_database_connection(current_app)
-    data = request.form
-    connection.execute(
-        "INSERT INTO user_details (user_username, user_password, user_email, user_role) VALUES (%s, %s, %s, %s)",
-        [data['username'], data['password'], data['email'], data['role']]
-    )
+    repository = UserRepository(connection)
+    username = request.form['user_username']
+    password = request.form['user_password']
+    email = request.form['user_email']
+    user_role = request.form['user_role']
+    # Hash the password using bcrypt
+    salt = bcrypt.gensalt()
+    user_password_hash_encode = bcrypt.hashpw(password.encode('utf-8'), salt)
+    user_password_hash = user_password_hash_encode.decode('utf-8')
+    
+    # Adding timestamp
+    user_created_at = datetime.datetime.now()
+    user = User(None, username, user_password_hash, email, user_role, user_created_at)
+    repository.create(user)
     return redirect('/index')
 
 # Login Page (GET)
@@ -39,7 +52,6 @@ def post_signup():
 def get_login():
     """
     Render the login form page.
-
     Returns:
         A rendered HTML template for the login form.
     """
@@ -49,11 +61,9 @@ def get_login():
 def post_login():
     """
     Handle login form submission.
-
     Validates user credentials from the database and stores session data for
     the logged-in user. Redirects to either the customer or lister page based
     on the user's role.
-
     Returns:
         Redirect to the appropriate dashboard page if login is successful.
         HTTP 401 with an error message if login fails.
