@@ -74,10 +74,11 @@ def post_login():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    # Query the user from the database.
+    # Query the user from the database
     user = repository.find(email)
 
     if user:
+        # Check password hashes
         if bcrypt.checkpw(password.encode('utf-8'), user.user_password_hash.encode('utf-8')):
             # Store session data for logged in user
             session['logged_in'] = True 
@@ -89,7 +90,8 @@ def post_login():
             else:
                 return redirect('/lister')
 
-    return "Invalid email or password", 401
+    flash('Invalid email or password', 'error')
+    return render_template("index.html")
 
 @auth_routes.route('/logout', methods=['GET'])
 def logout():
