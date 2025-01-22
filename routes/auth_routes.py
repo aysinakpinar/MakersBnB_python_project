@@ -83,6 +83,7 @@ def post_login():
             # Store session data for logged in user
             session['logged_in'] = True 
             session['user_role'] = user.user_role
+            session['user_email'] = user.user_email
 
 
             if user.user_role == 'customer':
