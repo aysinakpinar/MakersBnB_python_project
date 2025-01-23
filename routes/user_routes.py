@@ -7,15 +7,23 @@ from lib.user_repository import UserRepository
 user_routes = Blueprint('user_routes', __name__)
 
 # Edit user details (GET)
-@user_routes.route('/user_details', methods=['GET'], endpoint='get_user_details')
+@user_routes.route('/user_details', methods=['GET'])
 def get_user_details():
+    if not session.get('user_email'):
+        return redirect('/login')
+    user_email = session.get('user_email')
+    if not user_email:
+        return redirect('/login')  # Redirect if email is not in the session
     """
     Render the user details page.
 
     Returns:
         A rendered HTML template for the user details
     """
-    return render_template('user_details.html')  # gets user details
+    connection = get_flask_database_connection(current_app)
+    repository = UserRepository(connection)
+    user = repository.find(user_email)
+    return render_template('user_details.html', user = user)  # gets user details
 
 # Edit user details (POST)
 @user_routes.route('/edit_username', methods=['POST'], endpoint='post_edit_username')
@@ -31,7 +39,7 @@ def post_edit_username():
     connection = get_flask_database_connection(current_app)
     repository = UserRepository(connection)
     new_username = request.form['new_user_username']
-    user_email = request.form['user_email']
+    user_email = request.form.get('user_email')
     repository.update_username(user_email, new_username)
     return redirect('/user_details')
 
