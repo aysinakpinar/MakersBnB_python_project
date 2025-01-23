@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, current_app
 from lib.database_connection import get_flask_database_connection
+from lib.space_repository import SpaceRepository
 
 space_routes = Blueprint('space_routes', __name__)
 
@@ -13,13 +14,13 @@ def customer_page():
     """
     connection = get_flask_database_connection(current_app)
     spaces = connection.execute(
-        "SELECT space_id, space_name, space_description, space_price FROM spaces WHERE space_active = TRUE;"
+        "SELECT space_id, space_name, space_description, space_price FROM spaces"
     )
     return render_template('customer.html', spaces=spaces)
 
 
-@space_routes.route('/lister')
-def lister_page():
+@space_routes.route('/lister/<int:id>', methods=['GET'])
+def lister_page(id):
     """
     Render the lister page with all spaces.
 
@@ -27,7 +28,6 @@ def lister_page():
         Rendered lister.html with all spaces from the database.
     """
     connection = get_flask_database_connection(current_app)
-    spaces = connection.execute(
-        "SELECT space_id, space_name, space_description, space_price FROM spaces;"
-    )
+    repository = SpaceRepository(connection)
+    spaces = repository.get_spaces_for_id(id)
     return render_template('lister.html', spaces=spaces)

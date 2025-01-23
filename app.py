@@ -21,7 +21,8 @@ app.secret_key = os.getenv('SECRET_KEY', 'default_secret_key')  # Fallback if no
 def inject_user():
     return {
         'logged_in': session.get('logged_in', False),
-        'user_role': session.get('user_role', None)
+        'user_role': session.get('user_role', None),
+        'user_id': session.get('user_id', None)
     }
 
 

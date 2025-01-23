@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "spaces" (
     space_description TEXT,
     space_price NUMERIC(10, 2) NOT NULL,
     space_lister_id INT NOT NULL,
-    space_active BOOLEAN DEFAULT TRUE,
+    space_active VARCHAR(50) DEFAULT 'Available',
     space_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     space_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_space_lister FOREIGN KEY (space_lister_id) REFERENCES "user_details" (user_id) ON DELETE CASCADE
@@ -40,12 +40,18 @@ VALUES ('mike_brown', '$2a$12$kjJovGn1Uvc5sg6me5RgI4C/zmfuWo8u3.IJajDkzjRkj0ZK5L
 
 
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('Downtown Loft', '123 Main St, Manchester, Greater Manchester, United Kingdom', 'A stylish 2-bedroom loft in the heart of downtown.', 2500.00, 1, FALSE);
+VALUES ('Downtown Loft', '123 Main St, Manchester, Greater Manchester, United Kingdom', 'A stylish 2-bedroom loft in the heart of downtown.', 2500.00, 1, 'Available');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('Seaside Villa', '456 Ocean Ave, Brighton, East Sussex, United Kingdom', 'A luxurious seaside villa with an infinity pool and ocean views.', 8500.00, 2, TRUE);
+VALUES ('Seaside Villa', '456 Ocean Ave, Brighton, East Sussex, United Kingdom', 'A luxurious seaside villa with an infinity pool and ocean views.', 8500.00, 2, 'Unavailable');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('Mountain Retreat', '789 Alpine Rd, Snowdonia, Gwynedd, Wales, United Kingdom', 'A cozy cabin retreat perfect for a weekend getaway.', 1500.00, 3, FALSE);
+VALUES ('Mountain Retreat', '789 Alpine Rd, Snowdonia, Gwynedd, Wales, United Kingdom', 'A cozy cabin retreat perfect for a weekend getaway.', 1500.00, 3, 'Requested');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 5000.00, 4, TRUE);
+VALUES ('City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 5000.00, 4, 'Available');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('Suburban House', '202 Maple Dr, Birmingham, West Midlands, United Kingdom', 'A spacious 4-bedroom family home with a large backyard and garage.', 3200.00, 5, FALSE);
+VALUES ('Suburban House', '202 Maple Dr, Birmingham, West Midlands, United Kingdom', 'A spacious 4-bedroom family home with a large backyard and garage.', 3200.00, 5, 'Unavailable');
+INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
+VALUES ('name_1', 'address_1', 'description_1', 200, 1, 'Unavailable');
+INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
+VALUES ('name_2', 'address_2', 'description_2', 300, 1, 'Unavailable');
+INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
+VALUES ('name_3', 'address_3', 'description_3', 500, 1, 'Unavailable');
