@@ -1,9 +1,10 @@
-from flask import Blueprint, request, render_template, redirect, current_app, session
+from flask import Blueprint, request, render_template, redirect, current_app, session, flash
 from lib.database_connection import get_flask_database_connection
 from lib.user import User
 from lib.user_repository import UserRepository
 import datetime
 import bcrypt
+
 auth_routes = Blueprint('auth_routes', __name__)
 
 # Sign-Up Form (GET)
@@ -69,22 +70,29 @@ def post_login():
         HTTP 401 with an error message if login fails.
     """
     connection = get_flask_database_connection(current_app)
-    data = request.form
+    repository = UserRepository(connection)
+    email = request.form.get('email')
+    password = request.form.get('password')
 
     # Query the user from the database
-    user = connection.execute(
-        "SELECT * FROM user_details WHERE user_email = %s AND user_password_hash = %s",
-        [data['email'], data['password']]
-    )
+    user = repository.find(email)
 
     if user:
-        user = user[0]  # Fetch the first result
-        session['logged_in'] = True
-        session['user_role'] = user['user_role']  # 'customer' or 'lister'
-        session['user_email'] = user['user_email']
-        return redirect('/customer' if user['user_role'] == 'customer' else '/lister')
+        # Check password hashes
+        if bcrypt.checkpw(password.encode('utf-8'), user.user_password_hash.encode('utf-8')):
+            # Store session data for logged in user
+            session['logged_in'] = True 
+            session['user_role'] = user.user_role
+            session['user_email'] = user.user_email
+            
 
-    return "Invalid email or password", 401
+            if user.user_role == 'user':
+                return redirect('/customer')
+            else:
+                return redirect('/lister')
+
+    flash('Invalid email or password', 'error')
+    return render_template("index.html")
 
 @auth_routes.route('/logout', methods=['GET'])
 def logout():
