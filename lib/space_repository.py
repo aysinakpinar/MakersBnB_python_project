@@ -32,3 +32,12 @@ class SpaceRepository:
             space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
             spaces.append(space)
         return spaces
+    
+    def get_all_spaces(self):
+        rows = self.connection.execute('SELECT * FROM spaces')
+        spaces = []
+        for row in rows:
+            space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
+            spaces.append(space)
+        return spaces
+    

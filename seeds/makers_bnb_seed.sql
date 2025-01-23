@@ -49,9 +49,3 @@ INSERT INTO spaces (space_name, space_address, space_description, space_price, s
 VALUES ('City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 5000.00, 4, 'Available');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
 VALUES ('Suburban House', '202 Maple Dr, Birmingham, West Midlands, United Kingdom', 'A spacious 4-bedroom family home with a large backyard and garage.', 3200.00, 5, 'Unavailable');
-INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('name_1', 'address_1', 'description_1', 200, 1, 'Unavailable');
-INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('name_2', 'address_2', 'description_2', 300, 1, 'Unavailable');
-INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active)
-VALUES ('name_3', 'address_3', 'description_3', 500, 1, 'Unavailable');
