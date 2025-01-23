@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, request
 from lib.database_connection import get_flask_database_connection
 from lib.space_repository import SpaceRepository
 
@@ -30,4 +30,16 @@ def lister_page(id):
     connection = get_flask_database_connection(current_app)
     repository = SpaceRepository(connection)
     spaces = repository.get_spaces_for_id(id)
+    return render_template('lister.html', spaces=spaces)
+
+@space_routes.route('/lister/<int:id>', methods=['POST'])
+def lister_page_update(id):
+    """
+    Render the lister page with specific status of spaces.
+
+    """
+    connection = get_flask_database_connection(current_app)
+    repository = SpaceRepository(connection)
+    status = request.form['status']
+    spaces = repository.get_spaces_by_id_and_status(id, status)
     return render_template('lister.html', spaces=spaces)

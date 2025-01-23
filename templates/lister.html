@@ -6,6 +6,7 @@
         <title>Your Spaces</title>
         <link rel="stylesheet" href="/static/css/styles.css" />
     </head>
+
     <body>
         <header>
             <nav>
@@ -37,6 +38,21 @@
         </header>
 
         <main>
+            <nav>
+                <div>
+                    <form method="POST" action="/lister/{{ user_id }}">
+                        <button type="submit" name="status" value="Requested">
+                            Waiting for approval
+                        </button>
+                        <button type="submit" name="status" value="Available">
+                            Free
+                        </button>
+                        <button type="submit" name="status" value="Unavailable">
+                            Rented
+                        </button>
+                    </form>
+                </div>
+            </nav>
             <section class="lister-section">
                 <h1>Your Listed Spaces</h1>
                 <ul>

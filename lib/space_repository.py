@@ -24,3 +24,11 @@ class SpaceRepository:
             space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
             spaces.append(space)
         return spaces
+    
+    def get_spaces_by_id_and_status(self, user_id, space_status):
+        rows = self.connection.execute('SELECT * FROM spaces WHERE space_lister_id=%s AND space_active=%s', [user_id, space_status])
+        spaces = []
+        for row in rows:
+            space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
+            spaces.append(space)
+        return spaces
