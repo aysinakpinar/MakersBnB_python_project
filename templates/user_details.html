@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Spaces</title>
+    <title>User Details</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="/index" class="logo">MakersBnB</a>
+            <a href="/user_details" class="logo">MakersBnB</a>
             <div class="nav-links">
-                <a href="/user_details" class="{% if request.path == '/user_details' %}active{% endif %}">Account</a>
                 <a href="/customer" class="{% if request.path == '/customer' %}active{% endif %}">Browse Spaces</a>
                 {% if logged_in and user_role == 'lister' %}
                 <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
@@ -21,26 +20,33 @@
                 {% else %}
                 <a href="/logout">Logout</a>
                 {% endif %}
-            </div>            
+            </div>
+            
         </nav>
     </header>
 
-    <main>
-        <section class="customer-section">
-            <h1>Available Spaces</h1>
-            <ul>
-                {% for space in spaces %}
-                <li>
-                    <strong>{{ space['space_name'] }}</strong>: {{ space['space_description'] }} - ${{ space['space_price'] }}
-                </li>
-                {% endfor %}
-            </ul>
+    <main class="background">
+        <section class="signup-form">
+            <h1>User Details</h1>
+            <h2>Username</h2>
+            <p> {{user.user_username}}</p>
+                <a href="/edit_username"> Edit Username </a>
+            
+            <h2>Password</h2>
+            <p> **********</p>
+                <a href="/edit_password"> Edit Password </a>
+            
+            <h2>Email</h2>
+            <p> {{user.user_email}}</p>
+                <a href="/edit_user_email"> Edit Email</a>
+            <p><a href="/delete_account"> Delete Account</a></p>
+
+            </form>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 MakersBnB. All rights reserved. <a href="/about">About Us</a></p>
     </footer>
-
 </body>
 </html>

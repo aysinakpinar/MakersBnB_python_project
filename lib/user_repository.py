@@ -1,4 +1,5 @@
 from lib.user import User
+import bcrypt
 
 class UserRepository:
     # We initialise with a database connection
@@ -35,16 +36,25 @@ class UserRepository:
         return None
     
     # Update a username by its user email
-    def update_username(self, user_email, user_username):
+    def update_username(self, user_email, new_username):
         self._connection.execute(
-            f"UPDATE user_details SET user_username = '{user_username}' WHERE user_email = {user_email}"
+            'UPDATE user_details SET user_username = %s WHERE user_email = %s', [new_username, user_email]
         )
         return None
     
-    # Update a user password by its user email
-    def update_user_password(self, user_email, user_password_hash):
+        # Update a user password by its user email
+    def update_user_password(self, user_email, new_user_password):
+        # Hash the new password
+        new_user_password_hash = bcrypt.hashpw(new_user_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        # Update the password hash in the database
         self._connection.execute(
-            f"UPDATE user_details SET user_password_hash = '{user_password_hash}' WHERE user_email = {user_email}"
+            'UPDATE user_details SET user_password_hash = %s WHERE user_email = %s',
+            [new_user_password_hash, user_email]
         )
         return None
     
+    def update_user_email(self, user_email, new_user_email):
+        self._connection.execute(
+            'UPDATE user_details SET user_email = %s WHERE user_email = %s', [new_user_email, user_email]
+        )
+        return None   

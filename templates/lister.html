@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Your Spaces</title>
-        <link rel="stylesheet" href="/static/css/styles.css" />
-    </head>
-
-    <body>
-        <header>
-            <nav>
-                <a href="/index" class="logo">MakersBnB</a>
-                <div class="nav-links">
-                    <a
-                        href="/customer"
-                        class="{% if request.path == '/customer' %}active{% endif %}"
-                        >Browse Spaces</a
-                    >
-                    {% if logged_in and user_role == 'lister' and user_id ==
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Spaces</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/index" class="logo">MakersBnB</a>
+            <div class="nav-links">
+                <a href="/user_details" class="{% if request.path == '/user_details' %}active{% endif %}">Account</a>
+                <a href="/customer" class="{% if request.path == '/customer' %}active{% endif %}">Browse Spaces</a>
+                {% if logged_in and user_role == 'lister' and user_id ==
                     spaces[0].lister_id %}
-                    <a
-                        href="/lister"
-                        class="{% if request.path == '/lister/' ~ user_id%}active{% endif %}"
-                        >Lister Dashboard</a
-                    >
-                    {% endif %} {% if not logged_in %}
-                    <a
-                        href="/login"
-                        class="{% if request.path == '/login' %}active{% endif %}"
-                        >Login</a
-                    >
-                    {% else %}
-                    <a href="/logout">Logout</a>
-                    {% endif %}
-                </div>
-            </nav>
-        </header>
+                <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
+                {% endif %} {% if not logged_in %}
+                <a href="/login" class="{% if request.path == '/login' %}active{% endif %}">Login</a>
+                {% else %}
+                <a href="/logout">Logout</a>
+                {% endif %}
+            </div>            
+        </nav>
+    </header>
 
         <main>
             <nav>
