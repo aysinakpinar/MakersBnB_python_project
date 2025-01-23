@@ -53,7 +53,7 @@ class UserRepository:
         )
         return None
     
-    def update_user_email(self, new_user_email, user_email):
+    def update_user_email(self, user_email, new_user_email):
         self._connection.execute(
             'UPDATE user_details SET user_email = %s WHERE user_email = %s', [new_user_email, user_email]
         )

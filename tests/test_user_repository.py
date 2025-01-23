@@ -114,7 +114,7 @@ def test_update_user_email(db_connection):
     db_connection.seed("seeds/makers_bnb_seed.sql")
     repository = UserRepository(db_connection)
 
-    repository.update_user_email('mike_brown@example.com', 'mike.brown@example.com')
+    repository.update_user_email('mike.brown@example.com', 'mike_brown@example.com')
 
     users = repository.all()
 
