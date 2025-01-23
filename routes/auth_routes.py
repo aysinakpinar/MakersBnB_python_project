@@ -84,9 +84,9 @@ def post_login():
             session['logged_in'] = True 
             session['user_role'] = user.user_role
             session['user_email'] = user.user_email
+            
 
-
-            if user.user_role == 'customer':
+            if user.user_role == 'user':
                 return redirect('/customer')
             else:
                 return redirect('/lister')
