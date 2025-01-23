@@ -47,35 +47,6 @@ def post_signup():
     repository.create(user)
     return redirect('/index')
 
-# @auth_routes.route('/delete_user', methods=['DELETE'])
-# def delete_user():
-#     """
-#     Handle signup form submission.
-
-#     Inserts a new user into the database based on the form data and redirects
-#     to the login page.
-
-#     Returns:
-#         Redirect to the login page after successful signup.
-#     """
-
-#     connection = get_flask_database_connection(current_app)
-#     repository = UserRepository(connection)
-#     username = request.form['user_username']
-#     password = request.form['user_password']
-#     email = request.form['user_email']
-#     user_role = request.form['user_role']
-#     # Hash the password using bcrypt
-#     salt = bcrypt.gensalt()
-#     user_password_hash_encode = bcrypt.hashpw(password.encode('utf-8'), salt)
-#     user_password_hash = user_password_hash_encode.decode('utf-8')
-    
-#     # Adding timestamp
-#     user_created_at = datetime.datetime.now()
-#     user = User(None, username, user_password_hash, email, user_role, user_created_at)
-#     repository.create(user)
-#     return redirect('/index')
-
 # Login Page (GET)
 @auth_routes.route('/login', methods=['GET'])
 def get_login():
