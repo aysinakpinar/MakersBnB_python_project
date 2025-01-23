@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        {% if user_id == spaces[0].lister_id %}
         <header>
             <nav>
                 <a href="/index" class="logo">MakersBnB</a>
@@ -45,10 +46,10 @@
                             Waiting for approval
                         </button>
                         <button type="submit" name="status" value="Available">
-                            Free spaces
+                            Unbooked spaces
                         </button>
                         <button type="submit" name="status" value="Unavailable">
-                            Rented spaces
+                            Booked spaces
                         </button>
                         <button type="submit" name="status" value="All">
                             All spaces
@@ -56,8 +57,19 @@
                     </form>
                 </div>
             </nav>
+
             <section class="lister-section">
-                <h1>Your Listed Spaces</h1>
+                {% if current_status == "Available"%}
+                <h1>Unbooked Spaces</h1>
+                {% elif current_status == "Unavailable"%}
+                <h1>Booked Spaces</h1>
+                {% elif current_status == "Requested"%}
+                <h1>Waiting For Approval Spaces</h1>
+                {% elif current_status == "All"%}
+                <h1>All Your Spaces</h1>
+                {% endif %} {% if not spaces[0].name %}
+                <p>No spaces yet!</p>
+                {% else %}
                 <ul>
                     {% for space in spaces %}
                     <li>
@@ -66,6 +78,7 @@
                     </li>
                     {% endfor %}
                 </ul>
+                {% endif %}
             </section>
         </main>
 
@@ -75,5 +88,8 @@
                 <a href="/about">About Us</a>
             </p>
         </footer>
+        {% else %}
+        <p>Wrong address</p>
+        {% endif %}
     </body>
 </html>

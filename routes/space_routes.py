@@ -44,4 +44,4 @@ def lister_page_update(id):
         spaces = repository.get_spaces_for_id(id)
     else:
         spaces = repository.get_spaces_by_id_and_status(id, status)
-    return render_template('lister.html', spaces=spaces)
+    return render_template('lister.html', spaces=spaces, current_status=status)

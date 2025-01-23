@@ -15,6 +15,9 @@ class SpaceRepository:
         for row in rows:
             space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
             spaces.append(space)
+        if len(spaces) == 0:
+            Create_space = type('Space', (object,), {'lister_id': user_id})
+            return [Create_space]
         return spaces
     
     def get_spaces_by_status(self, space_status):
@@ -23,6 +26,9 @@ class SpaceRepository:
         for row in rows:
             space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
             spaces.append(space)
+        if len(spaces) == 0:
+            Create_space = type('Space', (object,), {'lister_id': user_id})
+            return [Create_space]
         return spaces
     
     def get_spaces_by_id_and_status(self, user_id, space_status):
@@ -31,6 +37,9 @@ class SpaceRepository:
         for row in rows:
             space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_created_at'], row['space_updated_at'], )
             spaces.append(space)
+        if len(spaces) == 0:
+            Create_space = type('Space', (object,), {'lister_id': user_id})
+            return [Create_space]
         return spaces
     
     def get_all_spaces(self):
