@@ -36,10 +36,12 @@ def lister_page(id):
 def lister_page_update(id):
     """
     Render the lister page with specific status of spaces.
-
     """
     connection = get_flask_database_connection(current_app)
     repository = SpaceRepository(connection)
     status = request.form['status']
-    spaces = repository.get_spaces_by_id_and_status(id, status)
+    if status == "All":
+        spaces = repository.get_spaces_for_id(id)
+    else:
+        spaces = repository.get_spaces_by_id_and_status(id, status)
     return render_template('lister.html', spaces=spaces)
