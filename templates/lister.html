@@ -18,11 +18,6 @@
                         class="{% if request.path == '/user_details' %}active{% endif %}"
                         >Account</a
                     >
-                    <a
-                        href="/customer"
-                        class="{% if request.path == '/customer' %}active{% endif %}"
-                        >Browse Spaces</a
-                    >
                     {% if logged_in and user_role == 'host' %} {% endif %} {% if
                     not logged_in %}
                     <a
