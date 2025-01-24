@@ -30,7 +30,7 @@ def lister_page(id):
     connection = get_flask_database_connection(current_app)
     repository = SpaceRepository(connection)
     spaces = repository.get_spaces_for_id(id)
-    return render_template('lister.html', spaces=spaces)
+    return render_template('lister.html', spaces=spaces, current_status="All")
 
 @space_routes.route('/lister/<int:id>', methods=['POST'])
 def lister_page_update(id):

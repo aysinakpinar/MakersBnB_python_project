@@ -18,11 +18,10 @@
                         class="{% if request.path == '/customer' %}active{% endif %}"
                         >Browse Spaces</a
                     >
-                    {% if logged_in and user_role == 'lister' and user_id ==
-                    spaces[0].lister_id %}
+                    {% if logged_in and user_role == 'host' %}
                     <a
                         href="/lister"
-                        class="{% if request.path == '/lister/' ~ user_id%}active{% endif %}"
+                        class="{% if request.path == '/lister' %}active{% endif %}"
                         >Lister Dashboard</a
                     >
                     {% endif %} {% if not logged_in %}
@@ -39,42 +38,76 @@
         </header>
 
         <main>
-            <nav>
-                <div>
-                    <form method="POST" action="/lister/{{ user_id }}">
-                        <button type="submit" name="status" value="Requested">
-                            Waiting for approval
-                        </button>
-                        <button type="submit" name="status" value="Available">
-                            Unbooked spaces
-                        </button>
-                        <button type="submit" name="status" value="Unavailable">
-                            Booked spaces
-                        </button>
-                        <button type="submit" name="status" value="All">
-                            All spaces
-                        </button>
-                    </form>
-                </div>
+            <nav class="nav-listings__status">
+                <form
+                    class="nav-listings__form"
+                    method="POST"
+                    action="/lister/{{ user_id }}"
+                >
+                    <button
+                        class="nav-listings__btn {% if current_status=='Requested' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Requested"
+                    >
+                        Waiting
+                    </button>
+                    <button
+                        class="nav-listings__btn {% if current_status=='Available' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Available"
+                    >
+                        Unbooked
+                    </button>
+                    <button
+                        class="nav-listings__btn nav {% if current_status=='Unavailable' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Unavailable"
+                    >
+                        Booked
+                    </button>
+                    <button
+                        class="nav-listings__btn {% if current_status=='All' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="All"
+                    >
+                        All
+                    </button>
+                </form>
             </nav>
 
             <section class="lister-section">
                 {% if current_status == "Available"%}
-                <h1>Unbooked Spaces</h1>
+                <h1 class="lister-section__title">Unbooked Spaces</h1>
                 {% elif current_status == "Unavailable"%}
-                <h1>Booked Spaces</h1>
+                <h1 class="lister-section__title">Booked Spaces</h1>
                 {% elif current_status == "Requested"%}
-                <h1>Waiting For Approval Spaces</h1>
+                <h1 class="lister-section__title">
+                    Waiting For Approval Spaces
+                </h1>
                 {% elif current_status == "All"%}
-                <h1>All Your Spaces</h1>
+                <h1 class="lister-section__title">All Your Spaces</h1>
                 {% endif %} {% if not spaces[0].name %}
                 <p>No spaces yet!</p>
                 {% else %}
-                <ul>
+                <ul class="cards-container">
                     {% for space in spaces %}
-                    <li>
-                        <strong>{{ space.name }}</strong>: {{ space.description
-                        }} - ${{ space.price }}
+                    <li class="space-card">
+                        <img class="space-card__img"></img>
+                        <div class="space-card__description">
+                            <span class="space-card__text space-card__name"
+                                >{{ space.name }}</span
+                            >
+                            <span class="space-card__text"
+                                >{{ space.description }}
+                            </span>
+                            <span class="space-card__text"
+                                >${{ space.price }}</span
+                            >
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>
