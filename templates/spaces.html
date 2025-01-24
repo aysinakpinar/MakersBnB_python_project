@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Browse Spaces</title>
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="/index" class="logo">MakersBnB</a>
+                <div class="nav-links">
+                    <a
+                        href="/user_details"
+                        class="{% if request.path == '/user_details' %}active{% endif %}"
+                        >Account</a
+                    >
+                    <a
+                        href="/spaces"
+                        class="{% if request.path == '/customer' %}active{% endif %}"
+                        >Browse Spaces</a
+                    >
+                    {% if logged_in and user_role == 'lister' %}
+                    <a
+                        href="/lister"
+                        class="{% if request.path == '/lister' %}active{% endif %}"
+                        >Lister Dashboard</a
+                    >
+                    {% endif %} {% if not logged_in %}
+                    <a
+                        href="/login"
+                        class="{% if request.path == '/login' %}active{% endif %}"
+                        >Login</a
+                    >
+                    {% else %}
+                    <a href="/logout">Logout</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section class="lister-section">
+                <h1>Spaces</h1>
+                {% if not spaces[0].name %}
+                <p>No spaces yet!</p>
+                {% else %}
+                <ul class="cards-container">
+                    {% for space in spaces %}
+                    <li class="space-card">
+                        {% if space.path %}
+                        <img src="{{ space.path }}" class="space-card__img" />
+                        {% else %}
+                        <div class="space-card__img"></div>
+                        {% endif %}
+                        <div class="space-card__description">
+                            <span class="space-card__text space-card__name"
+                                >{{ space.name }}</span
+                            >
+                            <span class="space-card__text"
+                                >{{ space.description }}
+                            </span>
+                            <span class="space-card__text"
+                                >${{ space.price }}</span
+                            >
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </section>
+        </main>
+        <footer>
+            <p>
+                &copy; 2025 MakersBnB. All rights reserved.
+                <a href="/about">About Us</a>
+            </p>
+        </footer>
+    </body>
+</html>

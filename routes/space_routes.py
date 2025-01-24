@@ -97,3 +97,10 @@ def add_space_lister_add_page(id):
     # add a new space into database 
     repository.add_space(Space(None, space_name, space_address, space_description, space_price, id, space_status, relative_path, None, None))
     return redirect('/lister/' + str(id))
+
+@space_routes.route('/spaces', methods=['GET'])
+def spaces_page():
+    connection = get_flask_database_connection(current_app)
+    repository = SpaceRepository(connection)
+    spaces = repository.get_all_spaces()
+    return render_template('spaces.html', spaces=spaces)

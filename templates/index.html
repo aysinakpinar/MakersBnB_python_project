@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MakersBnB - Login</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MakersBnB - Login</title>
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
+    <body>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
         <ul class="flashes">
             {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
+            <li class="{{ category }}">{{ message }}</li>
             {% endfor %}
         </ul>
-        {% endif %}
-    {% endwith %}
-    
-    <header>
-        <nav>
-            <a href="/index" class="logo">MakersBnB</a>
-            <div class="nav-links">
-                <a href="/customer">Browse Spaces</a>
-                {% if logged_in and user_role == 'lister' %}
-                <a href="/lister">Lister Dashboard</a>
-                {% endif %}
-            </div>
-        </nav>
-    </header>
+        {% endif %} {% endwith %}
 
-    <main class="background">
-        <section class="login-form">
-            <h1>Welcome Back</h1>
-            <p class="subtext">Log in to continue your MakersBnB journey</p>
-            <h2>Login</h2>
-            <form action="/login" method="post">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <header>
+            <nav>
+                <a href="/index" class="logo">MakersBnB</a>
+                <div class="nav-links">
+                    <a href="/spaces">Browse Spaces</a>
+                    {% if logged_in and user_role == 'lister' %}
+                    <a href="/lister">Lister Dashboard</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
 
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <main class="background">
+            <section class="login-form">
+                <h1>Welcome Back</h1>
+                <p class="subtext">Log in to continue your MakersBnB journey</p>
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    />
 
-                <button type="submit">Login</button>
-            </form>
-            <p class="form-footer">Don't have an account? <a href="/signup">Sign up here</a>.</p>
-        </section>
-    </main>
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    />
 
-    <footer>
-        <p>&copy; 2025 MakersBnB. All rights reserved. <a href="/about">About Us</a></p>
-    </footer>
-</body>
+                    <button type="submit">Login</button>
+                </form>
+                <p class="form-footer">
+                    Don't have an account? <a href="/signup">Sign up here</a>.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>
+                &copy; 2025 MakersBnB. All rights reserved.
+                <a href="/about">About Us</a>
+            </p>
+        </footer>
+    </body>
 </html>
