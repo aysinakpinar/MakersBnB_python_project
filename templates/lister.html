@@ -1,56 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Spaces</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="/index" class="logo">MakersBnB</a>
-            <div class="nav-links">
-                <a href="/user_details" class="{% if request.path == '/user_details' %}active{% endif %}">Account</a>
-                <a href="/customer" class="{% if request.path == '/customer' %}active{% endif %}">Browse Spaces</a>
-                {% if logged_in and user_role == 'lister' and user_id ==
-                    spaces[0].lister_id %}
-                <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
-                {% endif %} {% if not logged_in %}
-                <a href="/login" class="{% if request.path == '/login' %}active{% endif %}">Login</a>
-                {% else %}
-                <a href="/logout">Logout</a>
-                {% endif %}
-            </div>            
-        </nav>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Your Spaces</title>
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
 
-        <main>
+    <body>
+        {% if user_id == spaces[0].lister_id %}
+        <header>
             <nav>
-                <div>
-                    <form method="POST" action="/lister/{{ user_id }}">
-                        <button type="submit" name="status" value="Requested">
-                            Waiting for approval
-                        </button>
-                        <button type="submit" name="status" value="Available">
-                            Free
-                        </button>
-                        <button type="submit" name="status" value="Unavailable">
-                            Rented
-                        </button>
-                    </form>
+                <a href="/index" class="logo">MakersBnB</a>
+                <div class="nav-links">
+                    <a 
+                        href="/user_details" 
+                        class="{% if request.path == '/user_details' %}active{% endif %}"
+                        >Account</a>
+                    <a
+                        href="/customer"
+                        class="{% if request.path == '/customer' %}active{% endif %}"
+                        >Browse Spaces</a
+                    >
+                    {% if logged_in and user_role == 'host' %}
+                    <a
+                        href="/lister"
+                        class="{% if request.path == '/lister' %}active{% endif %}"
+                        >Lister Dashboard</a
+                    >
+                    {% endif %} {% if not logged_in %}
+                    <a
+                        href="/login"
+                        class="{% if request.path == '/login' %}active{% endif %}"
+                        >Login</a
+                    >
+                    {% else %}
+                    <a href="/logout">Logout</a>
+                    {% endif %}
                 </div>
             </nav>
+        </header>
+
+        <main>
+            <nav class="nav-listings__status">
+                <form
+                    class="nav-listings__form"
+                    method="POST"
+                    action="/lister/{{ user_id }}"
+                >
+                    <button
+                        class="nav-listings__btn {% if current_status=='Requested' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Requested"
+                    >
+                        Waiting
+                    </button>
+                    <button
+                        class="nav-listings__btn {% if current_status=='Available' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Available"
+                    >
+                        Unbooked
+                    </button>
+                    <button
+                        class="nav-listings__btn nav {% if current_status=='Unavailable' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Unavailable"
+                    >
+                        Booked
+                    </button>
+                    <button
+                        class="nav-listings__btn {% if current_status=='All' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="All"
+                    >
+                        All
+                    </button>
+                    <a href="{{request.path}}/add_space" class="nav-listings__btn nav-listings__add-btn">Add space</a>
+                </form>
+            </nav>
+
             <section class="lister-section">
-                <h1>Your Listed Spaces</h1>
-                <ul>
+                {% if current_status == "Available"%}
+                <h1 class="lister-section__title">Unbooked Spaces</h1>
+                {% elif current_status == "Unavailable"%}
+                <h1 class="lister-section__title">Booked Spaces</h1>
+                {% elif current_status == "Requested"%}
+                <h1 class="lister-section__title">
+                    Waiting For Approval Spaces
+                </h1>
+                {% elif current_status == "All"%}
+                <h1 class="lister-section__title">All Your Spaces</h1>
+                {% endif %} {% if not spaces[0].name %}
+                <p>No spaces yet!</p>
+                {% else %}
+                <ul class="cards-container">
                     {% for space in spaces %}
-                    <li>
-                        <strong>{{ space.name }}</strong>: {{ space.description
-                        }} - ${{ space.price }}
+                    <li class="space-card">
+                        <img class="space-card__img"></img>
+                        <div class="space-card__description">
+                            <span class="space-card__text space-card__name"
+                                >{{ space.name }}</span
+                            >
+                            <span class="space-card__text"
+                                >{{ space.description }}
+                            </span>
+                            <span class="space-card__text"
+                                >${{ space.price }}</span
+                            >
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>
+                {% endif %}
             </section>
         </main>
 
@@ -60,5 +126,8 @@
                 <a href="/about">About Us</a>
             </p>
         </footer>
+        {% else %}
+        <p>Wrong address</p>
+        {% endif %}
     </body>
 </html>
