@@ -31,7 +31,7 @@
             <ul>
                 {% for space in spaces %}
                 <li>
-                    <strong>{{ space['space_name'] }}</strong>: {{ space['space_description'] }} - ${{ space['space_price'] }}
+                    <strong>{{ space.name }}</strong>: {{ space.description }} - ${{ space.price }}
                 </li>
                 {% endfor %}
             </ul>

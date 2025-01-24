@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, current_app, request
+from flask import Blueprint, render_template, current_app, request, redirect
 from lib.database_connection import get_flask_database_connection
 from lib.space_repository import SpaceRepository
 
@@ -13,11 +13,20 @@ def customer_page():
         Rendered customer.html with active spaces from the database.
     """
     connection = get_flask_database_connection(current_app)
-    spaces = connection.execute(
-        "SELECT space_id, space_name, space_description, space_price FROM spaces"
-    )
+    repository = SpaceRepository(connection)
+    spaces = repository.get_all_spaces()
+    
     return render_template('customer.html', spaces=spaces)
 
+@space_routes.route('/')
+def list_spaces():
+    """
+    Show all spaces when hitting the root route '/'
+
+    Returns:
+        Redirects to /customer showing all spaces.
+    """
+    return redirect('/customer')
 
 @space_routes.route('/lister/<int:id>', methods=['GET'])
 def lister_page(id):
