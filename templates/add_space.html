@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Add Space</title>
-        <link rel="stylesheet" href="/static/css/styles.css" />
+        <link rel="stylesheet" href="/static/css/add-space.css" />
     </head>
     <body>
         {% if user_id == lister_id %}
@@ -19,7 +19,7 @@
                     >
                     {% if logged_in and user_role == 'host' %}
                     <a
-                        href="/lister"
+                        href="/lister/{{ lister_id }}"
                         class="{% if request.path == '/lister' %}active{% endif %}"
                         >Lister Dashboard</a
                     >

@@ -44,29 +44,28 @@ header nav .logo {
 header nav .nav-links a {
     margin-left: 20px;
     text-decoration: none;
-    color: #007bff;
+    color: rgba(86, 86, 187, 0.718);
     font-weight: 500;
 }
 
-/* active navigation link: highlight active page with tab-like underline */
 header nav .nav-links a.active {
-    position: relative; /* enable positioning for pseudo-element */
-    color: #0056b3; /* darker blue for active link */
-    font-weight: bold; /* make active link bold */
+    position: relative;
+    color: rgb(86, 86, 187);
+    font-weight: bold;
 }
 
 header nav .nav-links a.active::after {
-    content: ""; /* creates underline */
+    content: "";
     position: absolute;
-    bottom: -16px; /* position line below nav bar */
+    bottom: -16px;
     left: 0;
-    width: 100%; /* full width of link */
-    height: 4px; /* thickness of underline */
-    background-color: #007bff; /* blue underline color */
+    width: 100%;
+    height: 4px;
+    background-color: rgb(86, 86, 187);
 }
 
-/* navigation links hover: changes style when link is hovered */
 header nav .nav-links a:hover {
+    color: rgb(86, 86, 187);
     text-decoration: underline;
 }
 
@@ -260,15 +259,15 @@ input[type="radio"] {
 
 /* Countdown Bar Animation */
 .countdown-bar {
-    width: 100%;
+    width: 50%;
     height: 5px;
     background: #007bff;
-    animation: countdown 5s linear;
+    animation: countdown 1s linear;
 }
 
 @keyframes countdown {
     from {
-        width: 100%;
+        width: 50%;
     }
     to {
         width: 0;
@@ -374,7 +373,7 @@ footer a:hover {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 10px;
+    width: 100%;
 }
 
 .space-card__text {

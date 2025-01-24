@@ -19,11 +19,7 @@
                         >Browse Spaces</a
                     >
                     {% if logged_in and user_role == 'host' %}
-                    <a
-                        href="/lister"
-                        class="{% if request.path == '/lister' %}active{% endif %}"
-                        >Lister Dashboard</a
-                    >
+                    
                     {% endif %} {% if not logged_in %}
                     <a
                         href="/login"
