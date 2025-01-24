@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/static/css/user_details.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/user_details" class="logo">MakersBnB</a>
+            <div class="nav-links">
+                <a href="/lister/{{ user.user_id }}" >Lister Dashboard</a>
+                {% if logged_in and user_role == 'lister' %}
+                    <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
+                {% endif %}
+                {% if not logged_in %}
+                    <a href="/login" class="{% if request.path == '/login' %}active{% endif %}">Login</a>
+                {% else %}
+                    <a href="/logout">Logout</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="background">
+        <!-- Flash messages section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <section class="user-details">
+            <h1>User Details</h1>
+            
+            <!-- Display and Edit Username -->
+            <div class="user-detail-item">
+                <h2>Username</h2>
+                <p>{{ user.user_username }}</p>
+                <form action="/edit_username" method="post" class="edit-form">
+                    <label for="new_username">New Username:</label>
+                    <input type="text" id="new_username" name="new_username" placeholder="Enter new username" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <!-- Display and Edit Password -->
+            <div class="user-detail-item">
+                <h2>Password</h2>
+                <p>**********</p>
+                <form action="/edit_password" method="post" class="edit-form">
+                    <label for="new_password">New Password:</label>
+                    <input type="password" id="new_password" name="new_password" placeholder="Enter new password" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <!-- Display and Edit Email -->
+            <div class="user-detail-item">
+                <h2>Email</h2>
+                <p>{{ user.user_email }}</p>
+                <form action="/edit_email" method="post" class="edit-form">
+                    <label for="new_email">New Email:</label>
+                    <input type="email" id="new_email" name="new_email" placeholder="Enter new email" required>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <!-- Delete Account Option -->
+            <div class="user-detail-item">
+                <h2>Account Actions</h2>
+                <form action="/delete_account" method="post" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                    <button type="submit" class="delete-button">Delete Account</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MakersBnB. All rights reserved. <a href="/about">About Us</a></p>
+    </footer>
+</body>
+</html>

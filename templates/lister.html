@@ -13,6 +13,10 @@
             <nav>
                 <a href="/index" class="logo">MakersBnB</a>
                 <div class="nav-links">
+                    <a 
+                        href="/user_details" 
+                        class="{% if request.path == '/user_details' %}active{% endif %}"
+                        >Account</a>
                     <a
                         href="/customer"
                         class="{% if request.path == '/customer' %}active{% endif %}"

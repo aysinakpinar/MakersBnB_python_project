@@ -1,0 +1,166 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* header navigation bar: styles navigation at top */
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* logo styling: styles logo link in navigation */
+header nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+/* navigation links: styles links in navigation bar */
+header nav .nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+/* active navigation link: highlight active page with tab-like underline */
+header nav .nav-links a.active {
+    position: relative; /* enable positioning for pseudo-element */
+    color: #0056b3; /* darker blue for active link */
+    font-weight: bold; /* make active link bold */
+}
+
+header nav .nav-links a.active::after {
+    content: ''; /* creates underline */
+    position: absolute;
+    bottom: -16px; /* position line below nav bar */
+    left: 0;
+    width: 100%; /* full width of link */
+    height: 4px; /* thickness of underline */
+    background-color: #007bff; /* blue underline color */
+}
+
+/* navigation links hover: changes style when link is hovered */
+header nav .nav-links a:hover {
+    text-decoration: underline;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    background-color: #0056b3;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.user-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.user-details h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-detail-item {
+    margin-bottom: 20px;
+}
+
+.user-detail-item h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.user-detail-item p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.edit-form input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit-form button {
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-form button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+    color: #666;
+    margin-top: auto; /* ensures footer stays at bottom */
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

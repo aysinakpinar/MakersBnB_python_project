@@ -5,6 +5,7 @@ from lib.database_connection import get_flask_database_connection
 from routes.space_routes import space_routes
 from routes.auth_routes import auth_routes
 from routes.info_routes import info_routes
+from routes.user_routes import user_routes
 
 #load local env vars
 load_dotenv()
@@ -14,6 +15,7 @@ app = Flask(__name__, static_folder='static')
 app.register_blueprint(space_routes)
 app.register_blueprint(auth_routes)
 app.register_blueprint(info_routes)
+app.register_blueprint(user_routes)
 
 #load secret key for sessions to app from .env
 app.secret_key = os.getenv('SECRET_KEY', 'default_secret_key')  # Fallback if not set
@@ -22,6 +24,7 @@ def inject_user():
     return {
         'logged_in': session.get('logged_in', False),
         'user_role': session.get('user_role', None),
+        'user_email': session.get('user_email', None),  # Add user_email to the context
         'user_id': session.get('user_id', None)
     }
 
