@@ -1,16 +1,14 @@
-from flask import Blueprint, render_template, current_app, request
+from flask import Blueprint, render_template, current_app, request, flash, redirect
 from lib.database_connection import get_flask_database_connection
-from lib.space_repository import SpaceRepository
 from werkzeug.utils import secure_filename
 import os
-# from app import app
+from lib.space_repository import SpaceRepository
+from lib.space import Space
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static', 'img')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
 space_routes = Blueprint('space_routes', __name__)
-# app.register_blueprint(space_routes)
-# app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static', 'img')
-# app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -74,18 +72,19 @@ def add_space_lister_add_page(id):
     repository = SpaceRepository(connection)
     spaces = repository.get_spaces_for_id(id)
     lister_id = spaces[0].lister_id
+    # get form data
     space_name = request.form['space-name']
     space_address = request.form['space-address']
     space_description = request.form['space-description']
     space_price = request.form['space-price']
     space_status = "Available"
     file = request.files['space-image']
-    if file.filename == '':
-        flash('No selected file')
-        return redirect(request.url)
+    # define relative path to the image folder
+    relative_path = ""
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(UPLOAD_FOLDER, filename))
-        print(os.path.join(UPLOAD_FOLDER, filename))
-        # return redirect(url_for('download_file', name=filename))
-    return render_template('add_space.html', lister_id=lister_id)
+        relative_path = "../static/img/" + filename
+    # add a new space into database 
+    repository.add_space(Space(None, space_name, space_address, space_description, space_price, id, space_status, relative_path, None, None))
+    return redirect('/lister/' + str(id))

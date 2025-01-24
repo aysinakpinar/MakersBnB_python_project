@@ -76,7 +76,11 @@
                     >
                         All
                     </button>
-                    <a href="{{request.path}}/add_space" class="nav-listings__btn nav-listings__add-btn">Add space</a>
+                    <a
+                        href="{{request.path}}/add_space"
+                        class="nav-listings__btn nav-listings__add-btn"
+                        >Add space</a
+                    >
                 </form>
             </nav>
 
@@ -97,7 +101,11 @@
                 <ul class="cards-container">
                     {% for space in spaces %}
                     <li class="space-card">
-                        <img class="space-card__img"></img>
+                        {% if space.path %}
+                        <img src="{{ space.path }}" class="space-card__img" />
+                        {% else %}
+                        <div class="space-card__img"></div>
+                        {% endif %}
                         <div class="space-card__description">
                             <span class="space-card__text space-card__name"
                                 >{{ space.name }}</span
