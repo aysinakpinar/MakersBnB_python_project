@@ -47,11 +47,11 @@ def test_return_spaces_by_status(db_connection):
             space.updated_at = None
 
     assert spaces == [
-        Space(1, 'Downtown Loft', '123 Main St, Manchester, Greater Manchester, United Kingdom', 'A stylish 2-bedroom loft in the heart of downtown.', 450, 1, 'Available', None, None),
-        Space(4, 'City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 900, 4, 'Available', None, None),
-        Space(6, 'Urban Studio', '78 High St, Manchester, Greater Manchester, United Kingdom', 'A chic and compact studio apartment in the city center, ideal for young professionals.', 200, 1, 'Available', None, None),
-        Space(8, 'Country Estate', '543 Greenfield Rd, Surrey, South East England, United Kingdom', 'An expansive 5-bedroom estate with private gardens, a pool, and a tennis court.', 150, 1, 'Available', None, None),
-        Space(10, 'Downtown Condo', '56 Park Ave, Edinburgh, Scotland, United Kingdom', 'A modern 2-bedroom condominium with great views and close proximity to shops and restaurants.', 300, 1, 'Available', None, None)
+        Space(1, 'Downtown Loft', '123 Main St, Manchester, Greater Manchester, United Kingdom', 'A stylish 2-bedroom loft in the heart of downtown.', 450, 1, None, 'Available', None, None),
+        Space(4, 'City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 900, 4, None, 'Available', None, None),
+        Space(6, 'Urban Studio', '78 High St, Manchester, Greater Manchester, United Kingdom', 'A chic and compact studio apartment in the city center, ideal for young professionals.', 200, 1, None, 'Available', None, None),
+        Space(8, 'Country Estate', '543 Greenfield Rd, Surrey, South East England, United Kingdom', 'An expansive 5-bedroom estate with private gardens, a pool, and a tennis court.', 150, 1, None, 'Available', None, None),
+        Space(10, 'Downtown Condo', '56 Park Ave, Edinburgh, Scotland, United Kingdom', 'A modern 2-bedroom condominium with great views and close proximity to shops and restaurants.', 300, 1, None, 'Available', None, None)
         ]
 
 def test_return_spaces_by_status_and_id(db_connection):

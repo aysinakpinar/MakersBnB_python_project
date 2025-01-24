@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Space</title>
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
+    <body>
+        {% if user_id == lister_id %}
+        <header>
+            <nav>
+                <a href="/index" class="logo">MakersBnB</a>
+                <div class="nav-links">
+                    <a
+                        href="/customer"
+                        class="{% if request.path == '/customer' %}active{% endif %}"
+                        >Browse Spaces</a
+                    >
+                    {% if logged_in and user_role == 'host' %}
+                    <a
+                        href="/lister"
+                        class="{% if request.path == '/lister' %}active{% endif %}"
+                        >Lister Dashboard</a
+                    >
+                    {% endif %} {% if not logged_in %}
+                    <a
+                        href="/login"
+                        class="{% if request.path == '/login' %}active{% endif %}"
+                        >Login</a
+                    >
+                    {% else %}
+                    <a href="/logout">Logout</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        <main>
+            <h1>Add space</h1>
+            <section>
+                <form
+                    method="POST"
+                    action="/lister/{{ user_id }}/add_space"
+                    id="add-space-form"
+                    enctype="multipart/form-data"
+                >
+                    <div>
+                        <label for="space-name">Name</label>
+                        <textarea
+                            type="text"
+                            name="space-name"
+                            id="space-name"
+                            rows="2"
+                            cols="40"
+                            placeholder="Property name ..."
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label for="space-address">Address</label>
+                        <textarea
+                            type="text"
+                            name="space-address"
+                            id="space-address"
+                            rows="2"
+                            cols="40"
+                            placeholder="Property address ..."
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label for="space-description">Description</label>
+                        <textarea
+                            type="text"
+                            name="space-description"
+                            id="space-description"
+                            rows="2"
+                            cols="40"
+                            placeholder="Property description ..."
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label for="space-price">Price</label>
+                        <input
+                            type="text"
+                            name="space-price"
+                            id="space-price"
+                        />
+                    </div>
+                    <div>
+                        <label for="space-img">Image</label>
+                        <input
+                            type="file"
+                            name="space-image"
+                            id="space-image"
+                        />
+                    </div>
+                    <button type="submit">Add place</button>
+                </form>
+            </section>
+        </main>
+        {% else %}
+        <p>Ooops something went wrong</p>
+        {% endif %}
+    </body>
+</html>
