@@ -1,5 +1,6 @@
 /* general reset: sets up basic styles for body */
-html, body {
+html,
+body {
     height: 100%; /* ensures body spans full viewport height */
 }
 
@@ -16,7 +17,7 @@ body {
 .background {
     position: relative;
     height: 100%;
-    background-image: url('/static/img/background-2.jpg'); /* replace with image path */
+    background-image: url("/static/img/background-2.jpg"); /* replace with image path */
     background-size: cover;
     background-position: center;
 }
@@ -55,7 +56,7 @@ header nav .nav-links a.active {
 }
 
 header nav .nav-links a.active::after {
-    content: ''; /* creates underline */
+    content: ""; /* creates underline */
     position: absolute;
     bottom: -16px; /* position line below nav bar */
     left: 0;
@@ -90,7 +91,8 @@ header nav .nav-links a:hover {
 }
 
 /* form containers: styles signup and login forms */
-.signup-form, .login-form {
+.signup-form,
+.login-form {
     max-width: 400px;
     margin: 20px auto;
     background: #fff;
@@ -101,14 +103,16 @@ header nav .nav-links a:hover {
 }
 
 /* form headings: styles headings inside forms */
-.signup-form h2, .login-form h2 {
+.signup-form h2,
+.login-form h2 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
 }
 
 /* form labels: styles labels for inputs */
-.signup-form label, .login-form label {
+.signup-form label,
+.login-form label {
     display: block;
     text-align: left;
     margin-bottom: 5px;
@@ -117,7 +121,8 @@ header nav .nav-links a:hover {
 }
 
 /* form inputs: styles text inputs */
-.signup-form input, .login-form input {
+.signup-form input,
+.login-form input {
     width: calc(100% - 20px);
     padding: 8px 10px;
     margin-bottom: 15px;
@@ -127,7 +132,8 @@ header nav .nav-links a:hover {
 }
 
 /* form buttons: styles submit buttons for forms */
-.signup-form button, .login-form button {
+.signup-form button,
+.login-form button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -145,7 +151,8 @@ header nav .nav-links a:hover {
 }
 
 /* form buttons hover: changes button style on hover */
-.signup-form button:hover, .login-form button:hover {
+.signup-form button:hover,
+.login-form button:hover {
     background-color: #0056b3;
 }
 
@@ -207,7 +214,7 @@ input[type="radio"] {
 
 /* unselected and selected circles inside buttons */
 .radio-btn span::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -311,3 +318,114 @@ footer a:hover {
     border: 2px solid #f5c6cb;
 }
 
+/* |||| lister page styling |||| */
+.lister-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.lister-section__title {
+    margin-bottom: 2.5rem;
+}
+
+.nav-listings__status {
+    border-bottom: 0.5px solid rgb(182, 182, 208);
+}
+
+.cards-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    list-style-type: none;
+    flex-wrap: wrap;
+}
+
+.space-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 20rem;
+    height: 18 rem;
+    border: 0.5px solid rgb(169, 169, 169);
+    border-radius: 30px;
+}
+
+.space-card__img {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(214, 214, 214);
+    background-size: cover;
+    background-position: center;
+    height: 10rem;
+    width: 100%;
+    border-radius: 30px 30px 0 0;
+}
+.space-card__description {
+    display: flex;
+    height: 10rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.space-card__text {
+    margin: 0.5rem;
+    text-align: center;
+    max-height: 3rem;
+}
+
+.space-card__name {
+    font-weight: 700;
+}
+.nav-listings__form {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.nav-listings__btn {
+    box-sizing: border-box;
+    text-align: center;
+    background: none;
+    border: none;
+    margin: 1.2rem;
+    padding: 0;
+    font-size: 1rem;
+    color: rgba(86, 86, 187, 0.718);
+    cursor: pointer;
+    padding: 0;
+    width: 4.5rem;
+}
+
+.nav-listings__btn:hover {
+    color: rgb(86, 86, 187);
+}
+
+.nav-listings__btn.active {
+    font-weight: 600;
+    color: rgb(86, 86, 187);
+}
+
+.nav-listings__add-btn {
+    background-color: rgba(86, 86, 187, 0.572);
+    color: #f9f9f9;
+    width: 6rem;
+    padding: 0.25rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.nav-listings__add-btn:hover {
+    background-color: rgb(86, 86, 187);
+    color: #f9f9f9;
+}

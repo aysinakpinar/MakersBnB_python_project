@@ -84,12 +84,12 @@ def post_login():
             session['logged_in'] = True 
             session['user_role'] = user.user_role
             session['user_email'] = user.user_email
+            session['user_id'] = user.user_id
             
-
             if user.user_role == 'user':
                 return redirect('/customer')
             else:
-                return redirect('/lister')
+                return redirect('/lister/' + str(user.user_id))
 
     flash('Invalid email or password', 'error')
     return render_template("index.html")
