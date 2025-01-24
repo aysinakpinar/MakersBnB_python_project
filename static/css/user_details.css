@@ -25,6 +25,7 @@ header nav .logo {
 }
 
 /* navigation links: styles links in navigation bar */
+
 header nav .nav-links a {
     margin-left: 20px;
     text-decoration: none;
@@ -68,9 +69,9 @@ header nav .nav-links a:hover {
     border-radius: 5px;
 }
 
-.nav-links a.active,
 .nav-links a:hover {
-    background-color: #0056b3;
+    text-decoration: underline;
+    background-color: transparent; /* Fixes unwanted background */
 }
 
 main {
@@ -127,7 +128,7 @@ main {
 
 .edit-form button {
     padding: 8px;
-    background-color: #007bff;
+    background-color: rgba(86, 86, 187, 0.572);
     color: white;
     border: none;
     border-radius: 5px;
@@ -135,7 +136,7 @@ main {
 }
 
 .edit-form button:hover {
-    background-color: #0056b3;
+    background-color: rgb(88, 88, 174);
 }
 
 .delete-button {
