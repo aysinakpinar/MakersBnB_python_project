@@ -41,22 +41,22 @@ VALUES ('mike_brown', '$2a$12$kjJovGn1Uvc5sg6me5RgI4C/zmfuWo8u3.IJajDkzjRkj0ZK5L
 
 
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Downtown Loft', '123 Main St, Manchester, Greater Manchester, United Kingdom', 'A stylish 2-bedroom loft in the heart of downtown.', 450, 1, 'Available', NULL);
+VALUES ('Downtown Loft', '123 Main St, Manchester, Greater Manchester, United Kingdom', 'A stylish 2-bedroom loft in the heart of downtown.', 450, 1, 'Available', '../static/img/1' );
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Seaside Villa', '456 Ocean Ave, Brighton, East Sussex, United Kingdom', 'A luxurious seaside villa with an infinity pool and ocean views.', 850, 2, 'Unavailable', NULL);
+VALUES ('Seaside Villa', '456 Ocean Ave, Brighton, East Sussex, United Kingdom', 'A luxurious seaside villa with an infinity pool and ocean views.', 850, 2, 'Unavailable', '../static/img/2');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Mountain Retreat', '789 Alpine Rd, Snowdonia, Gwynedd, Wales, United Kingdom', 'A cozy cabin retreat perfect for a weekend getaway.', 1000, 3, 'Requested', NULL);
+VALUES ('Mountain Retreat', '789 Alpine Rd, Snowdonia, Gwynedd, Wales, United Kingdom', 'A cozy cabin retreat perfect for a weekend getaway.', 1000, 3, 'Requested', '../static/img/3');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 900, 4, 'Available', NULL);
+VALUES ('City Penthouse', '101 Skyline Blvd, London, Greater London, United Kingdom', 'A modern penthouse with panoramic city views and top-tier amenities.', 900, 4, 'Available', '../static/img/4');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Suburban House', '202 Maple Dr, Birmingham, West Midlands, United Kingdom', 'A spacious 4-bedroom family home with a large backyard and garage.', 600, 5, 'Unavailable', NULL);
+VALUES ('Suburban House', '202 Maple Dr, Birmingham, West Midlands, United Kingdom', 'A spacious 4-bedroom family home with a large backyard and garage.', 600, 5, 'Unavailable', '../static/img/5');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Urban Studio', '78 High St, Manchester, Greater Manchester, United Kingdom', 'A chic and compact studio apartment in the city center, ideal for young professionals.', 200, 1, 'Available', NULL);
+VALUES ('Urban Studio', '78 High St, Manchester, Greater Manchester, United Kingdom', 'A chic and compact studio apartment in the city center, ideal for young professionals.', 200, 1, 'Available', '../static/img/6');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Riverside Cottage', '34 River Rd, Oxford, Oxfordshire, United Kingdom', 'A quaint cottage by the river with a peaceful garden and walking trails.', 300, 1, 'Requested', NULL);
+VALUES ('Riverside Cottage', '34 River Rd, Oxford, Oxfordshire, United Kingdom', 'A quaint cottage by the river with a peaceful garden and walking trails.', 300, 1, 'Requested', '../static/img/7');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Country Estate', '543 Greenfield Rd, Surrey, South East England, United Kingdom', 'An expansive 5-bedroom estate with private gardens, a pool, and a tennis court.', 150, 1, 'Available', NULL);
+VALUES ('Country Estate', '543 Greenfield Rd, Surrey, South East England, United Kingdom', 'An expansive 5-bedroom estate with private gardens, a pool, and a tennis court.', 150, 1, 'Available', '../static/img/8');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Lochside Lodge', '123 Loch Rd, Inverness, Scotland, United Kingdom', 'A serene lodge overlooking a loch, perfect for nature lovers and outdoor enthusiasts.', 200, 1, 'Unavailable', NULL);
+VALUES ('Lochside Lodge', '123 Loch Rd, Inverness, Scotland, United Kingdom', 'A serene lodge overlooking a loch, perfect for nature lovers and outdoor enthusiasts.', 200, 1, 'Unavailable', '../static/img/9');
 INSERT INTO spaces (space_name, space_address, space_description, space_price, space_lister_id, space_active, space_image_path)
-VALUES ('Downtown Condo', '56 Park Ave, Edinburgh, Scotland, United Kingdom', 'A modern 2-bedroom condominium with great views and close proximity to shops and restaurants.', 300, 1, 'Available', NULL);
+VALUES ('Downtown Condo', '56 Park Ave, Edinburgh, Scotland, United Kingdom', 'A modern 2-bedroom condominium with great views and close proximity to shops and restaurants.', 300, 1, 'Available', '../static/img/1');
