@@ -13,8 +13,8 @@ space_routes = Blueprint('space_routes', __name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@space_routes.route('/customer')
-def customer_page():
+@space_routes.route('/customer/<int:id>', methods=['GET'])
+def customer_page(id):
     """
     Render the customer page with active spaces.
 
@@ -23,19 +23,19 @@ def customer_page():
     """
     connection = get_flask_database_connection(current_app)
     repository = SpaceRepository(connection)
-    spaces = repository.get_all_spaces()
-    
-    return render_template('customer.html', spaces=spaces)
+    spaces = repository.get_spaces_by_id_and_status(id, "Unavailable")
+    return render_template('customer.html', spaces=spaces, current_status="Unavailable")
 
-@space_routes.route('/')
-def list_spaces():
+@space_routes.route('/customer/<int:id>', methods=['POST'])
+def customer_page_update(id):
     """
-    Show all spaces when hitting the root route '/'
-
-    Returns:
-        Redirects to /customer showing all spaces.
+    Render the lister page with specific status of spaces.
     """
-    return redirect('/customer')
+    connection = get_flask_database_connection(current_app)
+    repository = SpaceRepository(connection)
+    status = request.form['status']
+    spaces = repository.get_spaces_by_id_and_status(id, status)
+    return render_template('customer.html', spaces=spaces, current_status=status)
 
 @space_routes.route('/lister/<int:id>', methods=['GET'])
 def lister_page(id):

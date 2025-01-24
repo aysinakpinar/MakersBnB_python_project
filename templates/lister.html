@@ -8,23 +8,23 @@
     </head>
 
     <body>
-        {% if user_id == spaces[0].lister_id %}
+        {% if user_id == spaces[0].lister_id and user_role == 'host'%}
         <header>
             <nav>
                 <a href="/index" class="logo">MakersBnB</a>
                 <div class="nav-links">
-                    <a 
-                        href="/user_details" 
+                    <a
+                        href="/user_details"
                         class="{% if request.path == '/user_details' %}active{% endif %}"
-                        >Account</a>
+                        >Account</a
+                    >
                     <a
                         href="/customer"
                         class="{% if request.path == '/customer' %}active{% endif %}"
                         >Browse Spaces</a
                     >
-                    {% if logged_in and user_role == 'host' %}
-                    
-                    {% endif %} {% if not logged_in %}
+                    {% if logged_in and user_role == 'host' %} {% endif %} {% if
+                    not logged_in %}
                     <a
                         href="/login"
                         class="{% if request.path == '/login' %}active{% endif %}"
@@ -131,7 +131,7 @@
             </p>
         </footer>
         {% else %}
-        <p>Wrong address</p>
+        <p>Ooops something went wrong</p>
         {% endif %}
     </body>
 </html>

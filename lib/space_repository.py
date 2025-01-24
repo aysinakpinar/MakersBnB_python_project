@@ -16,7 +16,7 @@ class SpaceRepository:
             space = Space(row['space_id'], row['space_name'], row['space_address'], row['space_description'], row['space_price'], row['space_lister_id'], row['space_active'], row['space_image_path'], row['space_created_at'], row['space_updated_at'], )
             spaces.append(space)
         if len(spaces) == 0:
-            Create_space = type('Space', (object,), {'lister_id': user_id})
+            Create_space = type('Space', (object,), {'lister_id': user_id })
             return [Create_space]
         return spaces
     

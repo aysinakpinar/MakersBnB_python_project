@@ -87,7 +87,7 @@ def post_login():
             session['user_id'] = user.user_id
 
             if user.user_role == 'user':
-                return redirect('/customer')
+                return redirect('/customer/' + str(user.user_id))
             else:
                 return redirect('/lister/' + str(user.user_id))
 
@@ -126,5 +126,5 @@ def index():
         Rendered HTML template for the login form if not logged in.
     """
     if session.get('logged_in'):  # Check if the user is logged in
-        return redirect('/customer')  # Redirect to "Browse Spaces" page
+        return redirect('/places')  # Redirect to "Browse Spaces" page
     return render_template('index.html')  # Render login form if not logged in

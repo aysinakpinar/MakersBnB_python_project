@@ -1,46 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Spaces</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="/index" class="logo">MakersBnB</a>
-            <div class="nav-links">
-                <a href="/user_details" class="{% if request.path == '/user_details' %}active{% endif %}">Account</a>
-                <a href="/customer" class="{% if request.path == '/customer' %}active{% endif %}">Browse Spaces</a>
-                {% if logged_in and user_role == 'lister' %}
-                <a href="/lister" class="{% if request.path == '/lister' %}active{% endif %}">Lister Dashboard</a>
-                {% endif %}
-                {% if not logged_in %}
-                <a href="/login" class="{% if request.path == '/login' %}active{% endif %}">Login</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Browse Spaces</title>
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
+    {% if user_id == spaces[0].lister_id and user_role == 'user' %}
+    <body>
+        <header>
+            <nav>
+                <a href="/index" class="logo">MakersBnB</a>
+                <div class="nav-links">
+                    <a
+                        href="/user_details"
+                        class="{% if request.path == '/user_details' %}active{% endif %}"
+                        >Account</a
+                    >
+                    <a
+                        href="/spaces"
+                        class="{% if request.path == '/customer' %}active{% endif %}"
+                        >Browse Spaces</a
+                    >
+                    {% if logged_in and user_role == 'lister' %}
+                    <a
+                        href="/lister"
+                        class="{% if request.path == '/lister' %}active{% endif %}"
+                        >Lister Dashboard</a
+                    >
+                    {% endif %} {% if not logged_in %}
+                    <a
+                        href="/login"
+                        class="{% if request.path == '/login' %}active{% endif %}"
+                        >Login</a
+                    >
+                    {% else %}
+                    <a href="/logout">Logout</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        <main>
+            <nav class="nav-listings__status">
+                <form
+                    class="nav-listings__form"
+                    method="POST"
+                    action="/customer/{{ user_id }}"
+                >
+                    <button
+                        class="nav-listings__btn nav {% if current_status=='Unavailable' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Unavailable"
+                    >
+                        Booked
+                    </button>
+                    <button
+                        class="nav-listings__btn {% if current_status=='Requested' %}active{% endif %}"
+                        type="submit"
+                        name="status"
+                        value="Requested"
+                    >
+                        Requested
+                    </button>
+                </form>
+            </nav>
+
+            <section class="lister-section">
+                {% if current_status == "Unavailable"%}
+                <h1 class="lister-section__title">Booked Spaces</h1>
+                {% elif current_status == "Requested"%}
+                <h1 class="lister-section__title">
+                    Waiting For Approval Spaces
+                </h1>
+                {% elif current_status == "All"%}
+                <h1 class="lister-section__title">All Your Spaces</h1>
+                {% endif %} {% if not spaces[0].name %}
+                <p>No spaces yet!</p>
                 {% else %}
-                <a href="/logout">Logout</a>
+                <ul class="cards-container">
+                    {% for space in spaces %}
+                    <li class="space-card">
+                        {% if space.path %}
+                        <img src="{{ space.path }}" class="space-card__img" />
+                        {% else %}
+                        <div class="space-card__img"></div>
+                        {% endif %}
+                        <div class="space-card__description">
+                            <span class="space-card__text space-card__name"
+                                >{{ space.name }}</span
+                            >
+                            <span class="space-card__text"
+                                >{{ space.description }}
+                            </span>
+                            <span class="space-card__text"
+                                >${{ space.price }}</span
+                            >
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
-            </div>            
-        </nav>
-    </header>
-
-    <main>
-        <section class="customer-section">
-            <h1>Available Spaces</h1>
-            <ul>
-                {% for space in spaces %}
-                <li>
-                    <strong>{{ space.name }}</strong>: {{ space.description }} - ${{ space.price }}
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 MakersBnB. All rights reserved. <a href="/about">About Us</a></p>
-    </footer>
-
-</body>
+            </section>
+        </main>
+        <footer>
+            <p>
+                &copy; 2025 MakersBnB. All rights reserved.
+                <a href="/about">About Us</a>
+            </p>
+        </footer>
+        {% else %}
+        <p>Ooops something went wrong</p>
+        {% endif %}
+    </body>
 </html>
