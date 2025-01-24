@@ -99,7 +99,8 @@ def post_edit_email():
         repository.update_user_email(user_email, new_user_email)
     finally:
         flash('Email updated successfully. Returning to log in page', 'success')
-    return redirect('/logout')
+        session.clear()
+    return redirect('/index')
 
 @user_routes.route('/delete_account', methods=['POST'], endpoint='delete_account')
 def delete_account():
@@ -122,7 +123,8 @@ def delete_account():
         repository.delete_account(user_email)
     finally:
         flash('Account was successfully deleted', 'success')
-    return redirect('/index')
+        session.clear()
+    return redirect('/login')
 
 
 @user_routes.route('/logout', methods=['GET'])
