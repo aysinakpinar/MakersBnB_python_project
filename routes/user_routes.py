@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, current_app, session
+from flask import Blueprint, request, render_template, redirect, current_app, session, flash
 from lib.database_connection import get_flask_database_connection
 from lib.user import User
 from lib.user_repository import UserRepository
@@ -38,9 +38,17 @@ def post_edit_username():
 
     connection = get_flask_database_connection(current_app)
     repository = UserRepository(connection)
-    new_username = request.form['new_user_username']
-    user_email = request.form.get('user_email')
-    repository.update_username(user_email, new_username)
+    new_username = request.form.get('new_username')
+    user_email = session.get('user_email')
+
+    if not user_email:
+        # Redirect to login page if session doesn't contain the email
+        return redirect('/login')
+    try:
+        # Update the username in the database
+        repository.update_username(user_email, new_username)
+    finally:
+        flash('Username updated successfully.', 'success')
     return redirect('/user_details')
 
 @user_routes.route('/edit_password', methods=['POST'], endpoint='post_edit_password')
@@ -55,10 +63,19 @@ def post_edit_password():
 
     connection = get_flask_database_connection(current_app)
     repository = UserRepository(connection)
-    new_user_password = request.form['new_user_user_password']
-    user_email = request.form['user_email']
-    repository.update_user_password(user_email, new_user_password)
+    new_user_password = request.form['new_password']
+    user_email = session.get('user_email')
+
+    if not user_email:
+        # Redirect to login page if session doesn't contain the email
+        return redirect('/login')
+    try:
+        # Update the password in the database
+        repository.update_user_password(user_email, new_user_password)
+    finally:
+        flash('Password updated successfully.', 'success')
     return redirect('/user_details')
+
 
 @user_routes.route('/edit_email', methods=['POST'], endpoint='post_edit_email')
 def post_edit_email():
@@ -71,25 +88,41 @@ def post_edit_email():
     """
     connection = get_flask_database_connection(current_app)
     repository = UserRepository(connection)
-    new_user_email = request.form['new_user_email']
-    user_email = request.form['user_email']
-    repository.update_user_email(user_email, new_user_email)
-    return redirect('/user_details')
+    new_user_email = request.form.get('new_email')
+    user_email = session.get('user_email')
 
-@user_routes.route('/delete_account', methods=['DELETE'], endpoint='delete_account')
+    if not user_email:
+        # Redirect to login page if session doesn't contain the email
+        return redirect('/login')
+    try:
+        # Update the password in the database
+        repository.update_user_email(user_email, new_user_email)
+    finally:
+        flash('Email updated successfully. Returning to log in page', 'success')
+    return redirect('/logout')
+
+@user_routes.route('/delete_account', methods=['POST'], endpoint='delete_account')
 def delete_account():
     """
 
-        Updates the email in the database based on the form data.
+        Deletes the account
 
     Returns:
-        Redirect to the user_details page after updating.
+        Redirect to the homepage
     """
     connection = get_flask_database_connection(current_app)
     repository = UserRepository(connection)
-    user_email = request.form['user_email']
-    repository.delete_account(user_email)
-    return "Account was successfully deleted"
+    user_email = session.get('user_email')
+
+    if not user_email:
+        # Redirect to login page if session doesn't contain the email
+        return redirect('/login')
+    try:
+        # Update the password in the database
+        repository.delete_account(user_email)
+    finally:
+        flash('Account was successfully deleted', 'success')
+    return redirect('/index')
 
 
 @user_routes.route('/logout', methods=['GET'])

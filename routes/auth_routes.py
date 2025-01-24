@@ -77,22 +77,24 @@ def post_login():
     # Query the user from the database
     user = repository.find(email)
 
-    if user:
+    if user:  # If user exists (this will check if the list is not empty or None)
         # Check password hashes
         if bcrypt.checkpw(password.encode('utf-8'), user.user_password_hash.encode('utf-8')):
             # Store session data for logged in user
-            session['logged_in'] = True 
+            session['logged_in'] = True
             session['user_role'] = user.user_role
             session['user_email'] = user.user_email
             session['user_id'] = user.user_id
-            
+
             if user.user_role == 'user':
                 return redirect('/customer')
             else:
                 return redirect('/lister/' + str(user.user_id))
 
+    # If user is not found or password doesn't match
     flash('Invalid email or password', 'error')
     return render_template("index.html")
+
 
 @auth_routes.route('/logout', methods=['GET'])
 def logout():

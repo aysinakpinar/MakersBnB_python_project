@@ -26,11 +26,13 @@ class UserRepository:
     def find(self, user_email):
         rows = self._connection.execute(
             'SELECT * from user_details WHERE user_email = %s', [user_email])
+        if not rows:
+            return None
         row = rows[0]
         return User(row["user_id"], row["user_username"], row["user_password_hash"], row["user_email"], row["user_role"], row["user_created_at"])
 
     # Delete a user by its user email
-    def delete(self, user_email):
+    def delete_account(self, user_email):
         self._connection.execute(
             'DELETE FROM user_details WHERE user_email = %s', [user_email])
         return None
