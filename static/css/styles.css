@@ -399,15 +399,33 @@ footer a:hover {
     background: none;
     border: none;
     margin: 1.2rem;
-    width: fit-content;
     padding: 0;
     font-size: 1rem;
-    color: rgb(86, 86, 187);
+    color: rgba(86, 86, 187, 0.718);
     cursor: pointer;
     padding: 0;
     width: 4.5rem;
 }
 
+.nav-listings__btn:hover {
+    color: rgb(86, 86, 187);
+}
+
 .nav-listings__btn.active {
     font-weight: 600;
+    color: rgb(86, 86, 187);
+}
+
+.nav-listings__add-btn {
+    background-color: rgba(86, 86, 187, 0.572);
+    color: #f9f9f9;
+    width: 6rem;
+    padding: 0.25rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.nav-listings__add-btn:hover {
+    background-color: rgb(86, 86, 187);
+    color: #f9f9f9;
 }
